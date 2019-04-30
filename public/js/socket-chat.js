@@ -13,25 +13,16 @@ socket.on('connect', () => {
 
     socket.emit('entrarChat', { usuario, sala }, (resp) => {
 
-        console.log('personas:', resp)
+        renderizarUsuarios(resp);
 
     });
 
 
 })
 
-// socket.on('disconnect', () => {
-//     console.log('Se perdió la conexión al servidor...');
-// })
-
-// socket.emit('emitirMensaje', {
-//     usuario: 'Sergio',
-//     edad: 42,
-//     info: 'Hola Mundo!'
-// })
-
 socket.on('crearMensaje', (data) => {
-    console.log(data);
+    renderizarMensajes(data, false);
+    scrollBottom();
 });
 
 socket.on('mensajePrivado', (data) => {
@@ -39,5 +30,5 @@ socket.on('mensajePrivado', (data) => {
 });
 
 socket.on('listaPersonas', (data) => {
-    console.log(data);
+    renderizarUsuarios(data);
 });
